@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>放大镜</title>
+	<style>
+		.box {
+			width: 450px;
+			height: 450px;
+			margin: 100px;
+			border: 1px solid #ccc;
+			position: relative;
+		}
+		.big {
+			width: 600px;
+			height: 600px;
+			border: 1px solid #ccc;
+			position: absolute;
+			top: 0;
+			left: 460px;
+			overflow: hidden;
+			display: none;
+		}
+		.mask {
+			width: 300px;
+			height: 300px;
+			background: rgba(255,255,0,0.3);
+			position: absolute;
+			top: 0;
+			left: 0;
+			cursor: move;
+			display: none;
+		}
+		.small {
+			position: relative;
+		}
+		.big img {
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="box" id="fdj">
+		<div class="small">
+			<img src="../images/small.jpg" alt="">
+			<div class="mask">
+
+			</div>
+		</div>
+		<div class="big">
+			<img src="../images/big.jpg" alt="">
+		</div>
+	</div>
+
+	<script>
+		var fdj = document.getElementById('fdj');
+		var small = fdj.children[0];
+		var mask = small.children[1];
+		var big = fdj.children[1];
+		var bigImg = big.children[0];
+
+		small.onmousemove = function(event){
+			mask.style.display = "block";
+			big.style.display = "block";
+
+			var event = event || window.event;
+			var x = event.clientX - fdj.offsetLeft - mask.offsetWidth/2;
+			var y = event.clientY - fdj.offsetTop - mask.offsetHeight/2;
+
+			if(x < 0){
+				x = 0;
+			}
+			if(x > fdj.offsetWidth - mask.offsetWidth){
+				x = fdj.offsetWidth - mask.offsetWidth;
+			}
+			if(y < 0){
+				y = 0;
+			}
+			if(y > fdj.offsetHeight - mask.offsetHeight){
+				y = fdj.offsetHeight - mask.offsetHeight;
+			}
+			mask.style.left = x + "px";
+			mask.style.top = y + "px";
+
+			var count = big.offsetWidth/small.offsetWidth;
+			bigImg.style.left = -x*count + "px";
+			bigImg.style.top = -y*count + "px";
+
+		}
+		small.onmouseout = function(){
+			mask.style.display = "none";
+			big.style.display = "none";
+		}
+	</script>
+</body>
+</html>

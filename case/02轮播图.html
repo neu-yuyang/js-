@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>无缝滚动</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		.box {
+			width: 200px;
+			height: 200px;
+			margin: 100px auto;
+			border: 1px solid #000;
+			position: relative;
+			overflow: hidden;
+		}
+		.box ul {
+			list-style: none;
+		}
+		.box ul img {
+			vertical-align: top;
+		}
+		.box ul {
+			width: 600%;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+		.box ul li {
+			float: left;
+		}
+		.box ol {
+			position: absolute;
+			bottom: 10px;
+			left: 50%;
+			margin-left: -60px;
+			list-style: none;
+		}
+		ol li {
+			float: left;
+			width: 20px;
+			height: 20px;
+			text-align: center;
+			line-height: 20px;
+			margin-right: 5px;
+			background-color: #fff;
+			cursor: pointer;
+		}
+		.current {
+			background-color: #f60;
+		}
+		.arrow {
+			width: 100%;
+			height: 40px;
+			position: absolute;
+			top: 50%;
+			margin-top: -20px;
+			display: none;
+		}
+		.arr_l,
+		.arr_r {
+			width: 25px;
+			height: 40px;
+			background: rgba(0,0,0,0.3);
+			font-size: 20px;
+			font-family: "simsun";
+			line-height: 40px;
+			text-align: center;
+			color: #fff;
+			cursor: pointer;
+		}
+		.arr_l:hover,
+		.arr_r:hover {
+			font-size: 40px;
+			background: rgba(0,0,0,0.5);
+		}
+		.arr_l {
+			float: left;
+		}
+		.arr_r {
+			float: right;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="box" id="scroll">
+		<ul>
+			<li><img src="../images/01.jpg" alt="图像01"></li>
+			<li><img src="../images/02.jpg" alt="图像02"></li>
+			<li><img src="../images/03.jpg" alt="图像03"></li>
+			<li><img src="../images/04.jpg" alt="图像04"></li>
+			<li><img src="../images/05.jpg" alt="图像05"></li>
+		</ul>
+		<ol>
+			<li class="current">1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ol>
+		<div class="arrow">
+			<div class="arr_l"><</div>
+			<div class="arr_r">></div>
+		</div>
+	</div>
+
+	<script>
+		var scroll = document.getElementById('scroll');
+		var ul = scroll.children[0];
+		var olLis = scroll.children[1].children;
+		var arrow = scroll.children[2];
+		var arr_l = arrow.children[0];
+		var arr_r = arrow.children[1];
+		var leader = 0, target = 0;
+		
+		//底部焦点图的样式切换
+		for(var i=0; i<olLis.length; i++){
+			olLis[i].index = i;
+			olLis[i].onmouseover = function(){
+				for(var j=0; j<olLis.length; j++){
+					olLis[j].className = '';
+				}
+				this.className = 'current';
+				target = -this.index * 200;
+			}
+		}
+
+		//控制左右箭头的显示与隐藏
+		scroll.onmouseover = function(){
+			arrow.style.display = "block";
+		}
+		scroll.onmouseout = function(){
+			arrow.style.display = "none";
+		}
+
+		arr_l.onclick = function(){
+			if(target <= -800){
+				target = -800;
+			}else{
+				target -= 200;
+			}
+			
+		}
+		arr_r.onclick = function(){
+			if(target >= 0){
+				target = 0;
+			}else{
+				target += 200;
+			}
+			
+		}
+
+		//开启定时器来控制ul的运动
+		setInterval(function(){
+			leader = leader + (target - leader)/10;
+			ul.style.left = leader + "px";
+		}, 30)
+	</script>
+</body>
+</html>
