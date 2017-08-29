@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>浏览器分屏</title>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		ul,ol {
+			list-style: none;
+		}
+		html,body {
+			width: 100%;
+			height: 100%;
+		}
+		ul {
+			width: 100%;
+			height: 100%;
+		}
+		ul li {
+			width: 100%;
+			height: 100%;
+			color: #fff;
+		}
+		ol {
+			position: fixed;
+			top: 30px;
+			left: 300px;
+		}
+		ol li {
+			width: 100px;
+			height: 50px;
+			float: left;
+			font-size: 30px;
+			color: #fff;
+			text-align: center;
+			line-height: 50px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<ul id="ul">
+		<li>首页</li>
+		<li>资讯</li>
+		<li>产品</li>
+		<li>关于</li>
+		<li>招聘</li>
+	</ul>
+	<ol id="ol">
+		<li>首页</li>
+		<li>资讯</li>
+		<li>产品</li>
+		<li>关于</li>
+		<li>招聘</li>
+	</ol>
+
+	<script>
+		var ul = document.getElementById('ul');
+		var ol = document.getElementById('ol');
+		var ulLis = ul.children;
+		var olLis = ol.children;
+		var color = ["#f60","#00f","#6f0","#60f","#f06"];
+		var leader = 0, target =0, timer = null;
+		for(var i=0; i<ulLis.length; i++){
+			ulLis[i].style.backgroundColor = color[i];
+			olLis[i].style.backgroundColor = color[i];
+			olLis[i].index = i;
+
+			olLis[i].onmouseover = function(){
+				target = ulLis[this.index].offsetTop;
+				timer = setInterval(function(){
+					leader = leader + (target - leader)/10;
+					window.scrollTo(0, leader);
+				}, 50);
+				
+			}
+		}
+	</script>
+</body>
+</html>

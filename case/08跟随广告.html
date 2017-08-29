@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>跟随广告</title>
+	<style>
+		.content {
+			width: 30%;
+			margin: 100px auto;
+			border: 1px solid #ccc;
+		}
+		img {
+			position: absolute;
+			top: 300px;
+			left: 30px;
+		}
+	</style>
+</head>
+<body>
+	<img src="../images/01.jpg" id="ad" alt="">
+	<div class="content">
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+		<p>我就是为了撑开页面的</p>
+	</div>
+	<script src="../js/common.js"></script>
+	<script>
+		var ad = $('ad');
+		var adtop = ad.offsetTop;
+		var	leader = 0,
+			target = 0,
+			timer = null;
+		window.onscroll = function(){
+			clearInterval(timer);
+			target = scroll().top + adtop;
+			timer = setInterval(function(){
+				leader = leader + (target - leader)/10;
+				ad.style.top = leader + "px";
+			}, 30);	
+		};
+	</script>
+</body>
+</html>
